@@ -1,0 +1,5 @@
+element Resultat{
+  for $books in //Book[count(Edition)>1]
+  order by $books/@Title
+  return element Bok {$books/@Title}
+}
