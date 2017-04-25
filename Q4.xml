@@ -1,0 +1,8 @@
+element Resultat {
+  for $f in doc("publishers.xml")//Publisher
+  let $bok := for $b in //Book
+                   where $b//Translation/@Publisher = $f/@Name
+                   return element Bok {attribute Titel {$b/@Title}, $b/@Genre}
+  order by $f/@Name
+  return element Förlag {attribute Namn {$f/@Name}, attribute Land {$f/Address/Country}, $bok}
+}

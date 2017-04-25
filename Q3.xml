@@ -1,0 +1,5 @@
+element Resultat {
+  for $books in //Translation[@Language = 'Russian']/../..
+  let $antal := distinct-values($books/Edition/Translation/@Language)       
+  return element Bok {attribute Titel {$books/@Title}, attribute Originalspråk {$books/@OriginalLanguage}, attribute Antalandraspråk {count($antal)-1}}
+}

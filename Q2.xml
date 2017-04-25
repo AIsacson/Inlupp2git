@@ -1,0 +1,7 @@
+element Resultat {
+  for $genre in //Book[not(@Genre = preceding::Book/@Genre)][@Genre]
+  let $author := for $x in //Author[not(@Name = preceding::Author/@Name)][../@Genre = $genre/@Genre]
+  order by $x/@Name
+  return element Författare {$x/@Name}
+  return element Genre {attribute Namn {$genre/@Genre}, $author}
+}
